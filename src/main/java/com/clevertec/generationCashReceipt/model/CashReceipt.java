@@ -1,0 +1,54 @@
+package com.clevertec.generationCashReceipt.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+import java.sql.Timestamp;
+import java.util.Set;
+
+/**
+ * An object representing the CashReceipt
+ *
+ * @version 1.0
+ * @author Ilkevich Anastasiya
+ */
+@Entity
+@Table(name="cash_receipt")
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+public class CashReceipt {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column (name = "id_cash_receipt")
+    private Long checkNumber;
+    @Column (name = "dateCreation")
+    private Timestamp dateCreation;
+
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "receipt_product",
+            joinColumns = @JoinColumn(name = "id_cash_receipt"),
+            inverseJoinColumns = @JoinColumn(name = "id_product")
+    )
+    private Set<Product> setProduct;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_shop")
+    private ShopInfo shopInfo;
+    @ManyToOne
+    @JoinColumn(name = "id_discount_card")
+    private DiscountCard discountCard;
+
+
+    //total
+
+}
+
