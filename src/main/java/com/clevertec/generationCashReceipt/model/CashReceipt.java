@@ -27,7 +27,7 @@ public class CashReceipt {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column (name = "id_cash_receipt")
     private Long checkNumber;
-    @Column (name = "dateCreation")
+    @Column (name = "date_creation")
     private Timestamp dateCreation;
 
 
