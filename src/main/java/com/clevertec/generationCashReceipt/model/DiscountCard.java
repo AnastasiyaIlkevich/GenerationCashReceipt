@@ -23,7 +23,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class DiscountCard {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_discount_card")
     private Long cardNumber;
     @Column (name = "discount")

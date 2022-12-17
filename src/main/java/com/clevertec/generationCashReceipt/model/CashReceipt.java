@@ -24,7 +24,7 @@ import java.util.Set;
 public class CashReceipt {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_cash_receipt")
     private Long checkNumber;
     @Column (name = "date_creation")

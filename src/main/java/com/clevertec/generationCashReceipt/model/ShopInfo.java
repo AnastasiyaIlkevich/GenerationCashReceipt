@@ -24,7 +24,7 @@ import java.util.Set;
 public class ShopInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_shop")
     private Long id;
     @Column (name = "shop_name")
