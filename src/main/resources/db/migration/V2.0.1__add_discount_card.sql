@@ -1,4 +1,4 @@
-INSERT INTO discount_card(id_discount_card, discount)
+INSERT INTO discount_card(number_card, discount)
 VALUES  (100001,0),
         (100002,7),
         (100003,3),

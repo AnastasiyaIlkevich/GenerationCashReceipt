@@ -22,9 +22,12 @@ import java.util.Set;
 @ToString
 @NoArgsConstructor
 public class DiscountCard {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_discount_card")
+    private Long id;
+    @Column (name = "number_card")
     private Long cardNumber;
     @Column (name = "discount")
     private byte discount;

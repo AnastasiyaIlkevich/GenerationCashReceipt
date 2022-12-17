@@ -46,7 +46,7 @@ public class DiscountCardController {
     @PutMapping("/{id}")
     public DiscountCardUpdateDto updateDiscountCard(@PathVariable("id") Long id,
                                                     @RequestBody DiscountCardUpdateDto discountCardDto) {
-        discountCardDto.setCardNumber(id);
+        discountCardDto.setId(id);
         DiscountCard discountCard = discountCardDto.toDiscountCard();
         return discountCardDto.fromDiscountCard((DiscountCard) abstractService.update(discountCard));
     }

@@ -9,6 +9,7 @@ ALTER TABLE cash_receipt ADD CONSTRAINT pk_cash_receipt PRIMARY KEY (id_cash_rec
 
 CREATE TABLE IF NOT EXISTS discount_card(
                                             id_discount_card SERIAL NOT NULL ,
+                                            number_card BIGINT NOT NULL,
                                             discount INTEGER NOT NULL
 );
 

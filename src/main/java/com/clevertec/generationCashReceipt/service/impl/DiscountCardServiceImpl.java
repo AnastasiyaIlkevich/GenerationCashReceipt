@@ -44,7 +44,7 @@ public class DiscountCardServiceImpl implements AbstractService<DiscountCard, Lo
 
     @Override
     public DiscountCard update(DiscountCard discountCard) {
-        discountCardRepository.findById(discountCard.getCardNumber()).orElseThrow(IdNotFoundException::new);
+        discountCardRepository.findById(discountCard.getId()).orElseThrow(IdNotFoundException::new);
         return discountCardRepository.save(discountCard);
     }
 
