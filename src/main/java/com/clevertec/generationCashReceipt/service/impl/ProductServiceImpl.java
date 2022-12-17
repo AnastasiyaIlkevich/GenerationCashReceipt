@@ -1,6 +1,6 @@
 package com.clevertec.generationCashReceipt.service.impl;
 
-import com.clevertec.generationCashReceipt.exceptions.ProductNotFoundException;
+import com.clevertec.generationCashReceipt.exceptions.IdNotFoundException;
 import com.clevertec.generationCashReceipt.model.Product;
 import com.clevertec.generationCashReceipt.repository.ProductRepository;
 import com.clevertec.generationCashReceipt.service.AbstractService;
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements AbstractService<Product, Long> {
 
     @Override
     public Product findById(Long id) {
-        return productRepository.findById(id).orElseThrow(ProductNotFoundException::new);
+        return productRepository.findById(id).orElseThrow(IdNotFoundException::new);
     }
 
     @Override
@@ -46,8 +46,8 @@ public class ProductServiceImpl implements AbstractService<Product, Long> {
 
     @Override
     public Product update(Product product) {
-        productRepository.findById(product.getId()).orElseThrow(ProductNotFoundException::new);
-        return  productRepository.save(product);
+        productRepository.findById(product.getId()).orElseThrow(IdNotFoundException::new);
+        return productRepository.save(product);
     }
 
     @Override
