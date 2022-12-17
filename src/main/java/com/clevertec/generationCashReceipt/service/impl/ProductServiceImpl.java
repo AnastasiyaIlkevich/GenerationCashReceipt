@@ -19,12 +19,12 @@ import java.util.List;
 
 
 @Component("ProductService")
-public class ProductService implements AbstractService<Product, Long> {
+public class ProductServiceImpl implements AbstractService<Product, Long> {
 
     private final ProductRepository productRepository;
 
     @Autowired
-    public ProductService(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 
