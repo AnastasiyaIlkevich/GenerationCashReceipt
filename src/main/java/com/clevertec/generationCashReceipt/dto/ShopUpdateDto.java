@@ -3,6 +3,8 @@ package com.clevertec.generationCashReceipt.dto;
 
 import com.clevertec.generationCashReceipt.model.ShopInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Getter;
 import lombok.Setter;
 

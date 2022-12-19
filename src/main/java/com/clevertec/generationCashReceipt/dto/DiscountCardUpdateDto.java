@@ -2,6 +2,7 @@ package com.clevertec.generationCashReceipt.dto;
 
 import com.clevertec.generationCashReceipt.model.DiscountCard;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.Getter;
 import lombok.Setter;
 

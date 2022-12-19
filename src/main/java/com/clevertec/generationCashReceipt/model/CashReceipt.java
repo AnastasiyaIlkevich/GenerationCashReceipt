@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.Set;
 
 /**
@@ -31,7 +32,7 @@ public class CashReceipt {
     private Timestamp dateCreation;
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "receipt_product",
             joinColumns = @JoinColumn(name = "id_cash_receipt"),
