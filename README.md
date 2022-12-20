@@ -14,8 +14,12 @@
 ### [📝 Задание](./Docum/Backend_dev_course_tesy.pdf) 
 
 ## Инструменты и технологии
+  - IntelliJ IDEA
+  - Docker Desktop
+  - Postman
 - Внедрённые:
   - JDK 17
+  - Gradl 7.5
   - Springboot
   - Spring Web
   - Spring Data JPA
