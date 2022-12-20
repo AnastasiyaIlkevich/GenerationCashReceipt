@@ -1,5 +1,6 @@
 package com.clevertec.generationCashReceipt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,7 @@ public class DiscountCard {
     private byte discount;
    // private Long ransomAmount;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy="discountCard", cascade = CascadeType.DETACH)
     private Set<CashReceipt> cashReceiptSet;
 }

@@ -1,5 +1,6 @@
 package com.clevertec.generationCashReceipt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,7 @@ public class CashReceipt {
     @Column (name = "date_creation")
     private Timestamp dateCreation;
 
-
+    @JsonIgnore
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(
             name = "receipt_product",
@@ -40,10 +41,11 @@ public class CashReceipt {
     )
     private Set<Product> setProduct;
 
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_shop")
     private ShopInfo shopInfo;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_discount_card")
     private DiscountCard discountCard;

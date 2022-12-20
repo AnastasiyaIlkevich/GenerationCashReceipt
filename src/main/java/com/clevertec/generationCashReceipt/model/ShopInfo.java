@@ -1,5 +1,6 @@
 package com.clevertec.generationCashReceipt.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,7 @@ public class ShopInfo {
     private String address;
     @Column (name = "phoneNumber")
     private String phoneNumber;
-
+@JsonIgnore
     @OneToMany(mappedBy="shopInfo", cascade = CascadeType.DETACH)
     private Set<CashReceipt> cashReceiptSet;
 

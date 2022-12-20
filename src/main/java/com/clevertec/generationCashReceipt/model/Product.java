@@ -1,6 +1,7 @@
 package com.clevertec.generationCashReceipt.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,8 +35,8 @@ public class Product {
     private Double price;
 //    @Transient
 //    private Long count;
-
-    @ManyToMany(mappedBy = "setProduct")
+@JsonIgnore
+@ManyToMany(mappedBy = "setProduct")
     private Set<CashReceipt> cashReceiptSet;
 
 
