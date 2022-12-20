@@ -74,7 +74,8 @@ public class CashReceiptServiceImpl implements AbstractService<CashReceipt, Long
 
     @Override
     public CashReceipt update(CashReceipt cashReceipt) {
-        return null;
+        cashReceiptRepository.findById(cashReceipt.getCheckNumber()).orElseThrow(IdNotFoundException::new);
+        return cashReceiptRepository.save(cashReceipt);
     }
 
     @Override
