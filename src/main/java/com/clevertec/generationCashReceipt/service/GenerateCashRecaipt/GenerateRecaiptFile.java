@@ -13,5 +13,5 @@ public interface GenerateRecaiptFile {
 
     void deleteFile();
 
-    StringBuilder bilderTextRecapt();
+    StringBuilder builderTextReceipt();
 }

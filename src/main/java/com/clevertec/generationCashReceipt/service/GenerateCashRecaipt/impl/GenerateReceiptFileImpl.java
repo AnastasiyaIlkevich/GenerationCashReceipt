@@ -4,6 +4,7 @@ import com.clevertec.generationCashReceipt.exceptions.IdNotFoundException;
 import com.clevertec.generationCashReceipt.model.CashReceipt;
 import com.clevertec.generationCashReceipt.repository.CashReceiptRepository;
 import com.clevertec.generationCashReceipt.service.GenerateCashRecaipt.GenerateRecaiptFile;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,15 +12,16 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+@Log4j2
 @Service
-public class GenerateRecaiptFileImpl implements GenerateRecaiptFile {
+public class GenerateReceiptFileImpl implements GenerateRecaiptFile {
 
     private static String nameFile;
     private static Long id;
     private final CashReceiptRepository cashReceiptRepository;
 
     @Autowired
-    public GenerateRecaiptFileImpl(CashReceiptRepository cashReceiptRepository) {
+    public GenerateReceiptFileImpl(CashReceiptRepository cashReceiptRepository) {
         this.cashReceiptRepository = cashReceiptRepository;
     }
 
@@ -29,7 +31,7 @@ public class GenerateRecaiptFileImpl implements GenerateRecaiptFile {
         try {
             Files.createFile(Path.of(nameFile));
         } catch (IOException e) {
-            System.out.println("Data input/output exception");
+            log.error("Data input/output exception " + e.getMessage());
         }
     }
 
@@ -37,7 +39,7 @@ public class GenerateRecaiptFileImpl implements GenerateRecaiptFile {
         return cashReceiptRepository.findById(id).orElseThrow(IdNotFoundException::new);
     }
 
-    public StringBuilder bilderTextRecapt() {
+    public StringBuilder builderTextReceipt() {
         CashReceipt cashReceipt = getModelFromDbByCheckNumber();
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -64,9 +66,9 @@ public class GenerateRecaiptFileImpl implements GenerateRecaiptFile {
         File file = new File(nameFile);
         try (FileWriter fileWriter = new FileWriter(file)) {
 
-            fileWriter.write(String.valueOf(bilderTextRecapt()));
+            fileWriter.write(String.valueOf(builderTextReceipt()));
         } catch (IOException e) {
-            System.out.println("Data input/output exception");
+            log.error("Data input/output exception " + e.getMessage());
         }
     }
 
@@ -77,9 +79,10 @@ public class GenerateRecaiptFileImpl implements GenerateRecaiptFile {
             }
         } catch (
                 FileNotFoundException e) {
-            System.out.printf("File \"%s\" does not exist\n", nameFile);
+            log.error(String.format("File \"%s\" does not exist\n", nameFile));
         } catch (IOException e) {
-            System.out.println("Data input/output exception");
+            log.error("Data input/output exception " + e.getMessage());
+
         }
     }
 
@@ -87,7 +90,7 @@ public class GenerateRecaiptFileImpl implements GenerateRecaiptFile {
         try {
             Files.delete(Path.of(nameFile));
         } catch (IOException e) {
-            System.out.println("You can't delete a file that already doesn't exist!");
+            log.error("You can't delete a file that already doesn't exist!" + e.getMessage());
         }
     }
 

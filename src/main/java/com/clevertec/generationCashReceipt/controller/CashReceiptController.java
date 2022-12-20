@@ -6,6 +6,7 @@ import com.clevertec.generationCashReceipt.model.CashReceipt;
 import com.clevertec.generationCashReceipt.model.ShopInfo;
 import com.clevertec.generationCashReceipt.service.AbstractService;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ import java.util.List;
  * @author Ilkevich Anastasiya
  * @version 1.0
  */
-
+@Log4j2
 @RestController
 @RequestMapping("/receipt")
 public class CashReceiptController {
@@ -32,17 +33,20 @@ public class CashReceiptController {
 
     @GetMapping
     private List<CashReceipt> getAllCashReceipt() {
+        log.debug(CashReceiptController.class + ". Start method getAllCashReceipt");
         return abstractService.getAll();
     }
 
     @GetMapping("/{id}")
     public CashReceipt getCashReceiptById(@PathVariable("id") Long id) {
+        log.info("Start method getCashReceiptById with id = " + id);
         return (CashReceipt) abstractService.findById(id);
     }
 
     @PostMapping()
     public void saveNewCashReceiptWithDefaultStore(@RequestBody CashReceiptSaveDto cashReceiptDto) {
         CashReceipt cashReceipt = cashReceiptDto.toCashReceipt();
+        log.info("Start method saveNewCashReceiptWithDefaultStore " + cashReceipt);
         abstractService.save(cashReceipt);
     }
 
@@ -53,6 +57,8 @@ public class CashReceiptController {
         ShopInfo shopInfo = new ShopInfo();
         shopInfo.setId(id);
         cashReceipt.setShopInfo(shopInfo);
+        log.info(String.format("Start method saveNewCashReceiptWithStoreId id shop = %d, " +
+                "cashReceipt = %s ", id, cashReceipt));
         abstractService.save(cashReceipt);
     }
 
@@ -61,11 +67,14 @@ public class CashReceiptController {
                                                   @RequestBody CashReceiptUpdateDto receiptUpdateDto) {
         receiptUpdateDto.setCheckNumber(id);
         CashReceipt cashReceipt = receiptUpdateDto.toCashReceipt();
+        log.info(String.format("Start method updateCashReceipt with id = %d " +
+                "and cashReceipt = %s", id, cashReceipt));
         return receiptUpdateDto.fromCashReceipt((CashReceipt) abstractService.update(cashReceipt));
     }
 
     @DeleteMapping("/{id}")
     public void deleteCashReceiptById(@PathVariable("id") Long id) {
+        log.info("Start method deleteCashReceiptById with id = " + id);
         abstractService.deleteById(id);
     }
 }
