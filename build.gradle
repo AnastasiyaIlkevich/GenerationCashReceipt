@@ -11,14 +11,20 @@ sourceCompatibility = '17'
 repositories {
     mavenCentral()
 }
-
+bootJar {
+    manifest {
+        attributes 'Start-Class': 'com.clevertec.generationCashReceipt.GenerationCashReceiptApplication'
+    }
+}
 dependencies {
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     runtimeOnly 'org.postgresql:postgresql'
     implementation 'org.flywaydb:flyway-core:9.10.0'
     compileOnly 'org.projectlombok:lombok:1.18.24'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    annotationProcessor "org.projectlombok:lombok:1.18.24"
 }
 
 tasks.named('test') {
