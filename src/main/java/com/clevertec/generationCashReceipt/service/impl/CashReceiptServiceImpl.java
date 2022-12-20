@@ -6,6 +6,7 @@ import com.clevertec.generationCashReceipt.model.ShopInfo;
 import com.clevertec.generationCashReceipt.repository.CashReceiptRepository;
 import com.clevertec.generationCashReceipt.repository.ShopInfoRepository;
 import com.clevertec.generationCashReceipt.service.AbstractService;
+import com.clevertec.generationCashReceipt.service.GenerateCashRecaipt.GenerateRecaiptFile;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -26,10 +27,12 @@ public class CashReceiptServiceImpl implements AbstractService<CashReceipt, Long
 
     private final CashReceiptRepository cashReceiptRepository;
     private final ShopInfoRepository shopInfoRepository;
+    private final GenerateRecaiptFile generateRecaiptFile;
 
-    public CashReceiptServiceImpl(CashReceiptRepository cashReceiptRepository, ShopInfoRepository shopInfoRepository) {
+    public CashReceiptServiceImpl(CashReceiptRepository cashReceiptRepository, ShopInfoRepository shopInfoRepository, GenerateRecaiptFile generateRecaiptFile) {
         this.cashReceiptRepository = cashReceiptRepository;
         this.shopInfoRepository = shopInfoRepository;
+        this.generateRecaiptFile = generateRecaiptFile;
     }
 
     @Override
@@ -63,6 +66,9 @@ public class CashReceiptServiceImpl implements AbstractService<CashReceipt, Long
         cashReceipt.setDateCreation(new Timestamp(Instant.now().toEpochMilli()));
         cashReceiptRepository.save(cashReceipt);
 
+        generateRecaiptFile.createFile(cashReceiptRepository.findByDateCreation(cashReceipt.getDateCreation())
+                .getCheckNumber());
+        generateRecaiptFile.writeFile();
     }
 
 
